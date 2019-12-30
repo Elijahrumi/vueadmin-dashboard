@@ -173,14 +173,12 @@
                                 <hr class="my-4" />
                                 <!-- Description -->
                                 <h6 class="heading-small text-muted mb-4">About me</h6>
-                                <div class="pl-lg-4">
-                                    <div class="form-group">
-                                        <base-input alternative=""
-                                                    label="About Me">
-                                            <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                                        </base-input>
+                                <template>
+                                    <div id="app">
+                                        <vue-editor v-model="model.description"></vue-editor>
                                     </div>
-                                </div>
+                                </template>
+                                
                             </form>
                         </template>
                     </card>
@@ -190,7 +188,11 @@
     </div>
 </template>
 <script>
-  export default {
+    import { VueEditor } from 'vue2-editor'
+    export default {
+        components: {
+            VueEditor
+        },
     name: 'user-profile',
     data() {
       return {
@@ -204,6 +206,7 @@
           country: '',
           zipCode: '',
           about: '',
+          description: '',
         }
       }
     },

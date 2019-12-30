@@ -142,6 +142,7 @@
     </div>
 </template>
 <script>
+  
   // Charts
   import * as chartConfigs from '@/components/Charts/config';
   import LineChart from '@/components/Charts/LineChart';
