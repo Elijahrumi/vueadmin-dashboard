@@ -16,12 +16,14 @@
     "flatpickr": "4.5.7",
     "nouislider": "13.1.4",
     "register-service-worker": "1.6.2",
+    "tiptap": "^1.26.6",
+    "tiptap-extensions": "^1.28.6",
+    "tiptap-vuetify": "^2.9.0",
     "vue": "2.6.6",
     "vue-chartjs": "3.4.2",
     "vue-clipboard2": "0.3.0",
     "vue-flatpickr-component": "8.1.2",
     "vue-router": "3.0.1",
-    "vue2-editor": "^2.10.2",
     "vue2-transitions": "0.3.0"
   },
   "devDependencies": {

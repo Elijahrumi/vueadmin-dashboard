@@ -172,13 +172,15 @@
                                 </div>
                                 <hr class="my-4" />
                                 <!-- Description -->
-                                <h6 class="heading-small text-muted mb-4">About me</h6>
                                 <template>
-                                    <div id="app">
-                                        <vue-editor v-model="model.description"></vue-editor>
-                                    </div>
+                                    <h6 class="heading-small text-muted mb-4">About me</h6>
+                                            <div>
+                                            <!-- Use the component in the right place of the template -->
+                                            <tiptap-vuetify
+                                            v-model="content"
+                                            :extensions="extensions"/>
+                                        </div>
                                 </template>
-                                
                             </form>
                         </template>
                     </card>
@@ -188,14 +190,60 @@
     </div>
 </template>
 <script>
-    import { VueEditor } from 'vue2-editor'
-    export default {
-        components: {
-            VueEditor
-        },
+    import Vue from 'vue'
+    import Vuetify from 'vuetify'
+    //importing plugin
+    import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
+   import { TiptapVuetify, Heading, Bold, Italic, Strike, Underline, Code, Paragraph, BulletList, OrderedList, ListItem, Link, Blockquote, HardBreak, HorizontalRule, History } from 'tiptap-vuetify'
+ 
+// don't forget to import CSS styles
+import 'tiptap-vuetify/dist/main.css'
+// Vuetify's CSS styles 
+import 'vuetify/dist/vuetify.min.css'
+
+// Vuetify Object (as described in the Vuetify 2 documentation)
+const vuetify = new Vuetify()
+
+// use Vuetify's plugin
+Vue.use(Vuetify)
+// use this package's plugin
+Vue.use(TiptapVuetifyPlugin, {
+  // the next line is important! You need to provide the Vuetify Object to this place.
+  vuetify, // same as "vuetify: vuetify"
+  // optional, default to 'md' (default vuetify icons before v2.0.0)
+  iconsGroup: 'md'
+})
+ export default{
+     // specify TiptapVuetify component in "components"
+  components: { TiptapVuetify },   
     name: 'user-profile',
     data() {
       return {
+      extensions: [
+      History,
+      Blockquote,
+      Link,
+      Underline,
+      Strike,
+      Italic,
+      ListItem,
+      BulletList,
+      OrderedList,
+      [Heading, {
+        options: {
+          levels: [1, 2, 3]
+        }
+      }],
+      Bold,
+      Code,
+      HorizontalRule,
+      Paragraph,
+      HardBreak
+    ],
+     content: `
+      <h1>Yay Headlines!</h1>
+      <p>All these <strong>cool tags</strong> are working now.</p>
+    `,
         model: {
           username: '',
           email: '',
@@ -206,10 +254,14 @@
           country: '',
           zipCode: '',
           about: '',
-          description: '',
+          editor: '',
         }
       }
     },
-  };
+   beforeDestroy() {
+    this.editor.destroy()
+  },
+    
+  }
 </script>
 <style></style>
